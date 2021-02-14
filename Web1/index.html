@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  	<meta charset="utf-8">
+	<title>Пипи</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<style type="text/css">
+		body {
+	  font-family: "Andale Mono", serif;
+	  color: #7CE700;
+	  background-color: #B5F36D;
+	}
+	#body{
+		position: absolute;
+		margin-right: 5%;
+	}
+
+	#content, header, footer {
+	  margin: 0 25%;
+	}
+
+	#content {
+	  background-color: #71AD2B;
+	  color: #9FF33D;
+	}
+
+
+	header, footer {
+	  background-color: #519600;
+	  padding: 12px 0;
+	}
+
+	footer, header, h1 {
+	  text-align: center;
+	}
+
+	h1 {
+	  font-size: 150%;
+		color: #fff;
+	}
+	h1:first-letter {
+		font-size: 125%;
+	}
+
+	.container {
+		width: 40%;
+		float: left;
+		margin: 2.5% 5%;
+	}
+		.container :checked + label
+		{
+
+			color: red;
+		}
+
+	.clear {
+		clear: both;
+	}
+
+	.container iframe {
+		border: 2px dashed #B5F36D;
+		width: 100%;
+	}
+
+	h3 {
+		font-size: 120%;
+		text-decoration: underline;
+		text-decoration-color: #519600;
+		color: #fff;
+		padding: 21px 0px 9px 0px;
+	}
+	table tr td{
+		width: 41%;
+	}
+
+
+	#areas {
+		position: absolute;
+		margin-left: -220px;
+		margin-top: 70px;
+		padding: 10px;
+		background-color: #71AD2B;
+		display: none;
+	}
+	#b_show_pic {
+		position: absolute;
+		margin-top: 55px;
+		height: 250px;
+	}
+	#b_hide_pic {
+		position: absolute;
+		margin-top: 80px;
+		margin-left: -30px;
+		display: none;
+	}
+
+
+
+
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Попадание точки в график</h1>
+	</header>
+	<div id="content">
+	<img src="areas.png" id="areas">
+	<button id="b_hide_pic" onclick="pic_hide()">X</button>
+	<button id="b_show_pic" onclick="pic_show()">
+		П<br>
+		О<br>
+		К<br>
+		А<br>
+		З<br>
+		А<br>
+		Т<br>
+		Ь<br>
+		<br>
+		Г<br>
+		Р<br>
+		А<br>
+		Ф<br>
+		И<br>
+		К
+	</button>
+
+		<div id="body">
+			<button id="buton" onclick="Fon()">Сменить цвет фона</button>
+		</div>
+
+		<div class="container">
+			<form action="response.php" method="post" target="graphics">
+
+				<h3>Выберите X:</h3>
+				<table>
+
+					<tr>
+						<td><input type="checkbox" name="x1" id="x1" value="-2" ><label>-2</label></td>
+						<td> <input type="checkbox" name="x2" id="x2" value="-1.5"><label>-1.5</label></td>
+						<td><input type="checkbox" name="x3" id="x3" value="-1"><label>-1</label></td>
+					</tr>
+					<tr>
+						<td><input type="checkbox" name="x4" id="x4" value="-0.5"><label>-0.5</label></td>
+						<td><input type="checkbox" name="x5" id="x5" value="0"><label>0</label></td>
+						<td><input type="checkbox" name="x6" id="x6" value="0.5"><label>0.5</label></td>
+					</tr>
+					<tr>
+
+						<td><input type="checkbox" name="x7" value="1"><label>1</label></td>
+						<td><input type="checkbox" name="x8" value="1.5"><label>1.5</label></td>
+						<td><input type="checkbox" name="x9" value="2"><label>2</label></td>
+
+					</tr>
+				</table>
+
+
+				<h3>Выберите Y:</h3>
+				<p><input type="text" maxlength="5" 	pattern="(-[1-5])||(-[0-4](\.)[0-9]{1,2})||([0-3]||([0-2](\.)[0-9]{1,3}))" size="10" name="y"  placeholder=" от -5 до 3"></p>
+					<span id="result"></span>
+
+					<h3>Выберите R:</h3>
+				<p id="radius">
+				<td><input type="checkbox" name="r" value="1" ><label>1</label></td>
+				<td> <input type="checkbox" name="r" value="2"><label>2</label></td>
+							<td><input type="checkbox" name="r" value="3"><label>3</label></td>
+							<td><input type="checkbox" name="r" value="4"><label>4</label></td>
+							<td><input type="checkbox" name="r" value="5"><label>5</label></td>
+
+				<p><button type="submit"  value="Отправить" onclick="onsubmit">Отправь</button> </p>
+
+
+			</form>
+		</div>
+
+
+		<div id="frame" class="container">
+			<iframe name = "graphics" height="325"></iframe>
+		</div>
+
+
+
+
+
+		<div class="clear"></div>
+	</div>
+
+	<footer>ProgML</footer>
+
+
+	<script type="text/javascript">
+
+
+		function Fon() {
+			var buton=document.getElementById("buton");
+			var allchar="0123456789ABCDEF";
+			buton.addEventListener("click",Fon);
+			var  randcol= "";
+			for(var i=0; i<6; i++){
+				randcol = randcol + allchar[Math.floor(Math.random()*16)];
+			}
+			document.body.style.backgroundColor= "#"+randcol;
+		}
+
+
+
+		function pic_show(){
+			document.getElementById("areas").style.display = "block";
+			document.getElementById("b_hide_pic").style.display = "block";
+			document.getElementById("b_show_pic").style.display = "none";
+		}
+		function pic_hide(){
+			document.getElementById("areas").style.display = "none";
+			document.getElementById("b_show_pic").style.display = "block";
+			document.getElementById("b_hide_pic").style.display = "none";
+		}
+
+	</script>
+</body>
+</html>
